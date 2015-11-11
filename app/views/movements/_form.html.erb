@@ -1,0 +1,36 @@
+<%= form_for(@movement) do |f| %>
+  <% if @movement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@movement.errors.count, "error") %> prohibited this movement from being saved:</h2>
+
+      <ul>
+      <% @movement.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <% doc_array = Document.all.map { |doc| [doc.short, doc.id] } %>
+  <% pos_array = Position.all.map { |pos| [pos.name, pos.id] } %>
+
+  <div class="field">
+    <%= f.label :document_id %><br>
+    <%= f.select :document_id, options_for_select(doc_array) %>
+  </div>
+  <div class="field">
+    <%= f.label :position_id %><br>
+    <%= f.select :position_id, options_for_select(pos_array) %>
+  </div>
+  <div class="field">
+    <%= f.label :item_id %><br>
+    <%= f.text_field :item_id %>
+  </div>
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.text_field :amount %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
