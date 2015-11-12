@@ -16,10 +16,10 @@
   <tbody>
     <% @movements.each do |movement| %>
       <tr>
-        <td><%= movement.document %></td>
-        <td><%= movement.position %></td>
-        <td><%= movement.item %></td>
-        <td><%= movement.amount %></td>
+        <td><%= movement.document_short %></td>
+        <td><%= movement.position_name %></td>
+        <td><%= movement.item_serial %></td>
+        <td><%= movement.amount_non_serial %></td>
         <td><%= link_to 'Show', movement %></td>
         <td><%= link_to 'Edit', edit_movement_path(movement) %></td>
         <td><%= link_to 'Destroy', movement, method: :delete, data: { confirm: 'Are you sure?' } %></td>

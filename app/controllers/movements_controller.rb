@@ -24,8 +24,14 @@ class MovementsController < ApplicationController
   # POST /movements
   # POST /movements.json
   def create
-    @movement = Movement.new(movement_params)
-
+  	@movement = Movement.new(movement_params)
+  	return render :new if @movement.document_id.blank? 
+  	return render :new if @movement.position_id.blank? 
+  	return render :new if @movement.item_id.blank? && 
+  		Position.find(@movement.position_id).serial
+  	return render :new if @movement.item_id.blank? && 
+  		@movement.amount.blank?
+    @movement.amount = 1 if !@movement.item_id.blank? 
     respond_to do |format|
       if @movement.save
         format.html { redirect_to @movement, notice: 'Movement was successfully created.' }

@@ -2,23 +2,25 @@
 
 <p>
   <strong>Document:</strong>
-  <%= @movement.document %>
+  <%= @movement.document_short %>
 </p>
 
 <p>
   <strong>Position:</strong>
-  <%= @movement.position %>
+  <%= @movement.position_name %>
 </p>
 
-<p>
-  <strong>Item:</strong>
-  <%= @movement.item %>
-</p>
-
-<p>
-  <strong>Amount:</strong>
-  <%= @movement.amount %>
-</p>
+<% if @movement.is_serial? %>
+  <p>
+    <strong>Item:</strong>
+    <%= @movement.item_serial %>
+  </p>
+<% else %>
+  <p>
+    <strong>Amount:</strong>
+    <%= @movement.amount %>
+  </p>
+<% end %>
 
 <%= link_to 'Edit', edit_movement_path(@movement) %> |
 <%= link_to 'Back', movements_path %>
